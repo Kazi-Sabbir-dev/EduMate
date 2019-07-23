@@ -4,8 +4,18 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const expbs = require('express-handlebars');
+const expressValidator = require('express-validator');
+const flash = require('connect-flash');
+const session = require('express-session');
+const passport = require('passport');
+const localStrategy = require('passport-local');
+const mongo = require('mongodb');
+const mongoose = require('mongoose');
 
+//database connection
+mongoose.connect('mongodb://localhost:27017/edumate', {useNewUrlParser: true});
 
+//Router
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const classRouter = require('./routes/classes');
@@ -27,6 +37,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+//Express Session
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: true,
+  
+}));
+//passport
+app.use(passport.initialize());
+  app.use(passport.session());
+
+  // Connect-Flash
+app.use(flash());
+
 
 //routes 
 app.use('/', indexRouter);
