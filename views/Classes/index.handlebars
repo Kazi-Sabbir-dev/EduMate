@@ -1,50 +1,43 @@
 
 {{> navigation}}
- <!----   <div class="grid-x">
-    {{#each classes}}
-  <div class="cell">
-      
-        <h4>{{title}}</h4>
-        <p>{{description}}</p>
-        <p>{{Instructor}}</p>
+ 
 
-
-  </div>
-  {{/each}}
-</div> ---->
 
 <div class="neat-article-container">
-  <div class="row large-8 columns align-center">
-    <div class="neat-article-header">
-      
-      
-    </div>
+  <div class="grid-x large-8 columns align-center">
+    
     <div class="neat-article-title">
-      <h3 class="article-title">
+     <section>
+     <h3 class="article-title">
        View your classes here.
       </h3>
+      </section>
     </div>
   </div>
   <div class="neat-article-image">
     <img class="article-image" src="https://i.imgur.com/0buQ75a.jpg" alt="Space">
   </div>
-  <div class="row neat-article-content">
+  <section>
+  <div class="grid-y neat-article-content" >
     
-    <div class="small-10 large-8 columns" id="sticky1">
+    <div class="cell " id="sticky1">
       <div class="article-content">
          {{#each classes}}
         <h4>{{title}}</h4>
         <p>
           
           {{description}}
+          <br>
           <strong>Instructor: {{Instructor}}</strong>
         </p>
+       <a href="/class/{{_id}}" class="button">Class details</a>
         {{/each}}
 
 
   </div>
       </div>
     </div>
+    </section>
   </div>
 
 </div>

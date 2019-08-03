@@ -24,7 +24,13 @@ const Class = module.exports = mongoose.model('Class', ClassSchema);
 
 //Fetch All classes
 
-module.exports.getClasses = function(callback,limit)
+module.exports.getClasses = function(callback)
 {
-    Class.find(callback).limit(limit);
+    Class.find(callback);
+}
+
+// Fetch single classes.
+module.exports.getclassById = function(id,callback)
+{
+    Class.findById(id,callback);
 }

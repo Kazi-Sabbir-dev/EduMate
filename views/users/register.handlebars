@@ -1,0 +1,75 @@
+{{> navigation}}
+<section>
+<h2>Create An Account</h2>
+{{#if errors}}
+        {{#each errors}}
+        <div class="alert callout" >
+            
+           <p><i class="fi-alert"></i> {{msg}} </p> 
+            
+        </div>        
+        {{/each}}
+{{/if}}        
+        
+        
+
+<form id="regform" method="post" action="/users/register">
+<div>
+    <label>Account Type</label>
+    <select name ="type">
+        <option value="student">student</option>
+        <option value="instructor">instructor</option>
+    </select>
+</div>
+<div>
+    <label>First Name: </label>
+    <input type="text" name="first_name" value="{{first_name}}">
+
+
+</div>
+<div>
+    <label>Last Name: </label>
+    <input type="text" name="last_name" value="{{last_name}}">
+
+</div>
+
+
+<div>
+    <label>Address: </label>
+    <input type="text" name="address" value="{{address}}">
+    
+</div>
+<div>
+    <label>Email: </label>
+    <input type="email" name="email" value="{{email}}">
+    
+</div>
+
+<div>
+    <label>Username: </label>
+    <input type="text" name="username" value="{{username}}">
+    
+</div>
+<div>
+    <label>Password: </label>
+    <input type="password" name="password" value="{{password}}">
+
+    
+</div>
+<div>
+    <label> Password Confirm: </label>
+    <input type="password" name="password2" value="{{password2}}">
+    
+</div>
+<div>
+    
+    <input type="submit"  value="Signup">
+    
+</div>
+
+
+
+
+
+</form>
+</section>
