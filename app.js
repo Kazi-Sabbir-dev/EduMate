@@ -16,7 +16,7 @@ const mongoose = require('mongoose');
 
 //database connection
 mongoose.connect('mongodb://localhost:27017/edumate', {useNewUrlParser: true});
-async = require('async');
+
 //Router
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -37,14 +37,14 @@ app.set('view engine', 'handlebars');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false }));
+
 
 
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 //Express Session
+
 app.use(session({
   secret: 'secret',
   resave: false,
@@ -64,6 +64,8 @@ app.use(flash());
 // Global vars
 app.use(function(req,res,next){
 res.locals.messages = require('express-messages')(req, res);
+
+
 next();
 }
 );

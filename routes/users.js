@@ -15,6 +15,12 @@ router.get('/register', function(req, res, next) {
   res.render('users/register');
 });
 
+//login Page
+router.get('/login', function(req,res)
+{
+	res.render('login');
+});
+
 // Register User
 router.post('/register',  [	check('first_name', 'First name field is required').not().isEmpty(),
 check('last_name', 'Last name field is required').not().isEmpty(),
@@ -22,8 +28,8 @@ check('email', 'Email field is required').not().isEmpty(),
 check('email', 'Email must be a valid email address').isEmail(),
 check('username', 'Username field is required').not().isEmpty(),
 check('password', 'Password field is required').not().isEmpty(),
-check('password2', 'Passwords do not match').custom((value, {req} ) => (value === req.body.password))],
-function(req, res, next) {
+check('password2', 'Passwords do not match').custom((value, {req} ) => (value === req.body.password))]
+, function(req, res) {
  	// Get Form Values
 	var first_name     	= req.body.first_name;
 	var last_name     	= req.body.last_name;
@@ -37,53 +43,103 @@ function(req, res, next) {
 	
 
 
-const	errors = validationResult(req);
+	const	errors = validationResult(req);
 
-	if(errors){
+	if(!errors.isEmpty()){
     console.log(errors.mapped());
 		res.render('users/register', {
 			errors: errors.mapped()
 		});
-  } 
-  else {
+	  }
+	   
+	  else{ 
+		  
+		//validation passed
+		
 		var newUser = new User({
-			email: email,
-			username:username,
-			password: password,
-			type: type
+		username: username,
+		email: email,
+		password: password,
+		type: type
+
+
+	});
+	if(type == 'student')
+	{
+		console.log('Registering student...');
+		var newStudent = new Student({
+			first_name: first_name,
+			last_name: last_name,
+			address: address,
+			username: username,
+			email: email
+
+		});
+		User.saveStudent(newUser, newStudent, function(err, user)
+		{
+			console.log('student created');
+		});
+		
+	}
+	else{
+		console.log('Registering instructor');
+		var newInstructor = new Instructor({
+			first_name: first_name,
+			last_name: last_name,
+			address: address,
+			username: username,
+			email: email
 		});
 
-		if(type == 'student'){
-			console.log('Registering Student...');
+		User.saveInstructor(newUser, newInstructor, function(err, user)
+		{
+			console.log('Instructor created');
+		});
+		
+			
+			
+	}
+	
+	res.render('login');
+	
+	
+	
+}
+	
+	
+		
 
+	/*	if(type == 'student')
+		{
+			console.log('Registering student...');
 			var newStudent = new Student({
 				first_name: first_name,
 				last_name: last_name,
 				address: address,
-				email: email,
-				username:username
-			});
+				username: username,
+				email: email
 
-			User.saveStudent(newUser, newStudent, function(err, user){
-				console.log('Student created');
 			});
-		} else {
-			console.log('Registering Instructor...');
+			User.saveStudent(newUser, newStudent);
+			console.log('Student created');
+		}
+		else{
+			console.log('Registering instructor');
 			var newInstructor = new Instructor({
 				first_name: first_name,
 				last_name: last_name,
-				address: address ,
-				email: email,
-				username:username
+				address: address,
+				username: username,
+				email: email
 			});
 
-			User.saveInstructor(newUser, newInstructor, function(err, user){
+			User.saveInstructor(newUser, newInstructor);
+			
 				console.log('Instructor created');
-			});
+				
 		}
-
-		
-	}
+  
+	req.flash('success', 'User added'); */
 });
 
 module.exports = router;

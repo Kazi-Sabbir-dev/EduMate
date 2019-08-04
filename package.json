@@ -6,23 +6,24 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "bcrypt": "^3.0.6",
+    "bcryptjs": "*",
     "body-parser": "*",
+    "connect-flash": "*",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "express-handlebars": "^3.1.0",
+    "express-messages": "*",
+    "express-session": "*",
+    "express-validator": "*",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1",
-    "bcryptjs": "*",
-    "passport": "*",
-    "passport-http": "*",
-    "passport-local": "*",
     "mongodb": "*",
     "mongoose": "*",
-    "express-session": "*",
-    "connect-flash": "*",
-    "express-messages": "*",
-    "express-validator": "*"
+    "morgan": "~1.9.1",
+    "passport": "*",
+    "passport-http": "*",
+    "passport-local": "*"
   },
   "devDependencies": {
     "motion-ui": "^2.0.3"
