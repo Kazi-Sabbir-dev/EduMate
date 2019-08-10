@@ -26,7 +26,8 @@ const aboutRouter = require('./routes/about');
 const contactRouter = require('./routes/contact');
 const loginRouter = require('./routes/login');
 const gradesRouter = require('./routes/grades');
-
+const students = require('./routes/students');
+const instructors = require('./routes/instructors');
 const app = express();
 
 // view engine setup
@@ -63,9 +64,10 @@ app.use(flash());
 
 // Global vars
 app.use(function(req,res,next){
-res.locals.messages = require('express-messages')(req, res);
-
-
+//res.locals.messages = require('express-messages')(req, res);
+res.locals.success_msg = req.flash('success_msg');
+res.locals.error_msg = req.flash('error_msg');
+res.locals.error = req.flash('error');
 next();
 }
 );
@@ -79,6 +81,8 @@ app.use('/contact', contactRouter);
 app.use('/login', loginRouter);
 app.use('/grades', gradesRouter);
 app.use('/class/:id',classDetails);
+app.use('/students', students);
+app.use('/instructors', instructors);
 
 
 // catch 404 and forward to error handler

@@ -42,6 +42,7 @@ module.exports.getUserByUsername = function(username,callback)
     User.findOne(query,callback);
 }
 
+
 // Compare password
 module.exports.comparePassword = function(candidatePassword, hash, callback)
 {
@@ -63,10 +64,10 @@ module.exports.saveStudent = function(newUser, newStudent, callback)
             //set hash
             newUser.password = hash;
             console.log('Student is being saved');
-             Promise.all(newUser.save(), newStudent.save()).then(value => 
-                {
-                    console.log(value)
-                }).catch(error => 
+             Promise.all(newUser.save(), newStudent.save()).then( 
+                
+                    console.log('Student Created')
+                ).catch(error => 
                     {
                         console.log(error.message)
                     });
@@ -87,7 +88,7 @@ module.exports.saveInstructor = function(newUser, newInstructor, callback)
         console.log('Instructor is being saved');
         Promise.all(newUser.save(), newInstructor.save()).then(value => 
             {
-                console.log(value)
+                console.log('Instructor created')
             }).catch(error => 
                 {
                     console.log(error.message)

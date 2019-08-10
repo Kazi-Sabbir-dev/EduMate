@@ -1,28 +1,40 @@
 
-
-
-
- 
- <div class="login-box">
-   <div class="grid-container">
-  <div class="row collapse expanded">
-    <div class="small-12 medium-6 column small-order-2 medium-order-1">
-      <div class="login-box-form-section">
+<section>
+          
         <h1 class="login-box-title">Sign In</h1>
+        {{#if success_msg}}
+        <div class="alert callout" >
+            
+           <p><i class="fi-alert"></i> {{success_msg}} </p> 
+            
+        </div>    
+        {{/if}}
+         {{#if error_msg}}
+        <div class="alert callout" >
+            
+           <p><i class="fi-alert"></i> {{error_msg}} </p> 
+            
+        </div>    
+        {{/if}}
+        {{#if error}}
+        <div class="alert callout" >
+            
+           <p><i class="fi-alert"></i> {{error}} </p> 
+            
+        </div>      
+        {{/if}}
+
+
+
+        <form method="POST" action="/login">
         <input class="login-box-input" type="text" name="username" placeholder="Username" />
         
         <input class="login-box-input" type="password" name="password" placeholder="Password" />
         
         <input class="login-box-submit-button" type="submit" name="signin_submit" value="Log In " />
-      </div>
-      
-    </div>
-    
-  
-  </div> 
-  </div>
-</div>
-
+      </form>
+     
+</section>
 
        
 
