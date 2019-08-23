@@ -109,8 +109,9 @@ check('password2', 'Passwords do not match').custom((value, {req} ) => (value ==
 	
 
 		  
-		  res.render('login');
+		  
 		  req.flash('success_msg', 'User Added');
+		  res.redirect('/login');
 	
 	
 }

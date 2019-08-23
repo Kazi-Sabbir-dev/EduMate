@@ -1,41 +1,135 @@
+{{>navigation}}
+{{#if user}}
+      <section>
+      <h5>Welcome Back {{user.username}}</h5>
+      <ul class="alt">
+         <li><a href="/{{type}}s/classes">My Classes</a></li>
+         <li><a href="/login/logout">Logout</a></li>
 
-<section>
+      </ul>
+      </section>
+      {{else}}
+      <section>
           
-        <h1 class="login-box-title">Sign In</h1>
-        {{#if success_msg}}
-        <div class="alert callout" >
+         {{#if success_msg}}
+        <div class="callout success" data-closable="slide-out-right" >
             
-           <p><i class="fi-alert"></i> {{success_msg}} </p> 
+           <p><i class="fi-alert"></i> {{success_msg}} </p>
+            
+            <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+               <span aria-hidden="true">&times;</span>
+            </button>
+
             
         </div>    
         {{/if}}
+
          {{#if error_msg}}
-        <div class="alert callout" >
+        <div class=" callout alert " data-closable="slide-out-right" >
             
-           <p><i class="fi-alert"></i> {{error_msg}} </p> 
+           <p><i class="fi-alert"></i> {{error_msg}} 
+           </p> 
+           <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+               <span aria-hidden="true">&times;</span>
+            </button>
             
         </div>    
         {{/if}}
+
         {{#if error}}
-        <div class="alert callout" >
+        <div class="alert callout" data-closable="slide-out-right">
             
            <p><i class="fi-alert"></i> {{error}} </p> 
-            
+            <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+               <span aria-hidden="true">&times;</span>
+            </button>
         </div>      
         {{/if}}
 
-
-
-        <form method="POST" action="/login">
-        <input class="login-box-input" type="text" name="username" placeholder="Username" />
-        
-        <input class="login-box-input" type="password" name="password" placeholder="Password" />
-        
-        <input class="login-box-submit-button" type="submit" name="signin_submit" value="Log In " />
-      </form>
+   <form class="log-in-form" method="post" action="/login">
+    
+  <h4 class="text-center">Log in with your username</h4>
+   <label>Username
+   <input type="text" placeholder="Username" name="username">
+  </label>
+  <label>Password
+    <input type="password" placeholder="Password" name="password">
+  </label>
+   
+  <p><input type="submit" class="button expanded" value="Log in" name="signin_submit"></input></p>
+  <p class="text-center"><a href="/users/register">Not Registered?</a>
      
+  </p>
+  
+  
+</form>
+     
+
+
 </section>
 
+
+{{/if}}
+<!---<section>
+          
+         {{#if success_msg}}
+        <div class="callout success" data-closable="slide-out-right" >
+            
+           <p><i class="fi-alert"></i> {{success_msg}} </p>
+            
+            <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+               <span aria-hidden="true">&times;</span>
+            </button>
+
+            
+        </div>    
+        {{/if}}
+
+         {{#if error_msg}}
+        <div class=" callout alert " data-closable="slide-out-right" >
+            
+           <p><i class="fi-alert"></i> {{error_msg}} 
+           </p> 
+           <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+               <span aria-hidden="true">&times;</span>
+            </button>
+            
+        </div>    
+        {{/if}}
+
+        {{#if error}}
+        <div class="alert callout" data-closable="slide-out-right">
+            
+           <p><i class="fi-alert"></i> {{error}} </p> 
+            <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+               <span aria-hidden="true">&times;</span>
+            </button>
+        </div>      
+        {{/if}}
+
+   <form class="log-in-form" method="post" action="/login">
+    
+  <h4 class="text-center">Log in with your username</h4>
+   <label>Username
+   <input type="text" placeholder="Username" name="username">
+  </label>
+  <label>Password
+    <input type="password" placeholder="Password" name="password">
+  </label>
+   
+  <p><input type="submit" class="button expanded" value="Log in" name="signin_submit"></input></p>
+  <p class="text-center"><a href="/users/register">Not Registered?</a>
+     
+  </p>
+  
+  
+</form>
+     
+
+
+</section>
+
+----->
        
 
 

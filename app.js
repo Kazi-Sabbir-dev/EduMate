@@ -62,6 +62,15 @@ app.use(passport.initialize());
   // Connect-Flash
 app.use(flash());
 
+app.get('*', function(req,res,next)
+{
+  res.locals.user = req.user || null;
+  if(req.user)
+  {
+    res.locals.type = req.user.type;
+  }
+  next();
+});
 // Global vars
 app.use(function(req,res,next){
 //res.locals.messages = require('express-messages')(req, res);
