@@ -13,10 +13,10 @@ const ClassSchema = mongoose.Schema({
         type: String
     },
     //Array of objects
-    lessions:[{
-        lession_number: {type: Number},
-        lession_title: {type: String},
-        lession_body: {type: String}
+    lessons:[{
+        lesson_number: {type: Number},
+        lesson_title: {type: String},
+        lesson_body: {type: String}
     }]
 });
 
@@ -33,4 +33,19 @@ module.exports.getClasses = function(callback)
 module.exports.getclassById = function(id,callback)
 {
     Class.findById(id,callback);
+}
+
+module.exports.addLesson = function(info,callback)
+{
+    class_id = info['class_id'];
+    lesson_number = info['lesson_number'];
+    lesson_title = info['lesson_title'];
+
+    lesson_body = info['lesson_body'];
+    Class.findByIdAndUpdate(
+        class_id,
+        {$push: {"lessons": {lesson_number: lesson_number, lesson_title: lesson_title, lesson_body: lesson_body}}},
+        {safe: true, upsert: true},
+        callback
+    );
 }

@@ -21,7 +21,7 @@ mongoose.connect('mongodb://localhost:27017/edumate', {useNewUrlParser: true});
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const classRouter = require('./routes/classes');
-const classDetails = require('./routes/classesDetails');
+
 const aboutRouter = require('./routes/about');
 const contactRouter = require('./routes/contact');
 const loginRouter = require('./routes/login');
@@ -89,7 +89,7 @@ app.use('/about', aboutRouter);
 app.use('/contact', contactRouter);
 app.use('/login', loginRouter);
 app.use('/grades', gradesRouter);
-app.use('/class/:id',classDetails);
+
 app.use('/students', students);
 app.use('/instructors', instructors);
 

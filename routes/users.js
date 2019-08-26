@@ -41,7 +41,7 @@ check('password2', 'Passwords do not match').custom((value, {req} ) => (value ==
  	// Get Form Values
 	var first_name     	= req.body.first_name;
 	var last_name     	= req.body.last_name;
-    var address           = req.body.address;
+    var address         = req.body.address;
 	var email    		= req.body.email;
 	var username 		= req.body.username;
 	var password 		= req.body.password;

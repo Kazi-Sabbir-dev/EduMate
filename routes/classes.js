@@ -11,11 +11,8 @@ router.get('/', function(req, res, next) {
  });
   
 });
-
-
-/*get class details */
-
-router.get('/:id', function(req, res, next) {
+//get class by id 
+router.get('/:id/details', function(req, res, next) {
     Classes.getclassById([req.params.id],function(err,classname)
     {
         if(err) throw err;
@@ -23,6 +20,17 @@ router.get('/:id', function(req, res, next) {
     });
      
    });
+
+router.get('/:id/lessons', function(req,res,next)
+{
+    Classes.getclassById([req.params.id],function(err, classname)
+    {
+        if(err) throw err;
+        res.render('Classes/lessons', {class: classname});
+    });
+});
+
+
    
 
 

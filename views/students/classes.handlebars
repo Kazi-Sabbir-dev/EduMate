@@ -1,3 +1,5 @@
+<section>
+
 <h2>{{student.first_name}}'s Classes</h2>
 <table>
     <thead>
@@ -11,8 +13,9 @@
         <tr>
             <td>{{class_id}}</td>
             <td>{{class_title}}</td>
-            <td><a href="/classes/{{class_id}}/lessons">View Lessons</a></td>
+            <td><a href="/class/{{class_id}}/lessons">View Lessons</a></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+</section>

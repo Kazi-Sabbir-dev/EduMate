@@ -43,12 +43,13 @@
                               <li>{{lesson_title}}</li>
                               {{/each}}
                             </ul>
+                            
                             {{#if user}}
-                            <form id="classRegform" method="post" action="/students/classes/register">
+                            <form id="classRegform" method="post" action="/{{type}}s/classes/register">
                             
                             <input type="hidden" name="student_id" value="{{user._id}}">
                             <input type="hidden" name="class_id" value="{{class._id}}">
-                            <input type="hidden" name="student_id" value="{{class.title}}">
+                            <input type="hidden" name="class_title" value="{{class.title}}">
                             <input type="submit" class="button"  value="Register for this class">
 
                             
