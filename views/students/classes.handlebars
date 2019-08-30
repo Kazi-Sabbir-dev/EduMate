@@ -1,3 +1,4 @@
+{{> navigation}}
 <section>
 
 <h2>{{student.first_name}}'s Classes</h2>
@@ -6,6 +7,8 @@
         <tr>
             <th>Class ID</th>
             <th>Class Name</th>
+            <th></th>
+            
         </tr>
     </thead>
     <tbody>
@@ -14,6 +17,7 @@
             <td>{{class_id}}</td>
             <td>{{class_title}}</td>
             <td><a href="/class/{{class_id}}/lessons">View Lessons</a></td>
+            
         </tr>
         {{/each}}
     </tbody>

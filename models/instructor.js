@@ -35,6 +35,7 @@ module.exports.register = function(info, callback){
     instructor_username = info['instructor_username'];
     class_id = info['class_id'];
     class_title = info['class_title'];
+    
 
     var query = {username: instructor_username};
     Instructor.findOneAndUpdate(

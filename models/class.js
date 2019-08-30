@@ -12,12 +12,26 @@ const ClassSchema = mongoose.Schema({
     {
         type: String
     },
+    class_code:
+    {
+        type: Number
+    },
+    student_code:
+    {
+        type: Number
+    },
     //Array of objects
     lessons:[{
         lesson_number: {type: Number},
         lesson_title: {type: String},
         lesson_body: {type: String}
-    }]
+    }],
+    enrolled_students:[
+        {
+            student_username: {type: String}
+        }
+    ]
+   
 });
 
 const Class = module.exports = mongoose.model('Class', ClassSchema);
@@ -49,3 +63,20 @@ module.exports.addLesson = function(info,callback)
         callback
     );
 }
+
+module.exports.register = function(info, callback){
+   
+    class_id = info['class_id'];
+    
+    student_username = info['student_username'];
+    
+
+    var query = {_id: class_id};
+    Class.findOneAndUpdate(
+        query,
+        {$push: {"enrolled_students": { student_username: student_username}}},
+        {safe: true, upsert: true},
+        callback
+    );
+}
+

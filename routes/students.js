@@ -13,4 +13,39 @@ router.get('/classes', function(req,res,next){
     });
 });
 
+
+router.post('/classes/:id/register',function(req,res)
+{   
+
+        info_student = [];
+        info_student['class_id'] = req.body.class_id;
+        
+        info_student['student_username']= req.user.username;
+    
+  
+      
+          info = [];
+          info['student_username'] = req.user.username;
+          info['class_id'] = req.body.class_id;
+          info['class_title'] = req.body.class_title;
+      
+          Student.register(info, function(err, student)
+          {
+              if(err) throw err;
+              console.log(student);
+          });
+          
+        Class.register(info_student, function(err, student)
+        {
+                console.log(student);
+        });
+        req.flash('success_msg', 'You are now registered to teach this class');
+          res.redirect('/students/classes');
+
+      
+      
+    
+
+});
+
 module.exports = router;

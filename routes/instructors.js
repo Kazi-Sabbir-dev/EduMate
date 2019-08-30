@@ -13,20 +13,40 @@ router.get('/classes', function(req,res,next){
     });
 });
 
-router.post('/classes/register', function(req,res)
+router.post('/classes/:id/register', function(req,res)
 {   
-    info = [];
-    info['instructor_username'] = req.user.username;
-    info['class_id'] = req.body.class_id;
-    info['class_title'] = req.body.class_title;
-    Instructor.register(info, function(err, instructor)
-    {
-        if(err) throw err;
-        console.log(instructor);
-    });
-    req.flash('success_msg', 'You are now registered to teach this class');
-    res.redirect('/instructors/classes');
-});
+    
+  Class.getclassById([req.params.id], function(err, classname)
+  {
+      if(err) throw err;
+     var class_code = classname.class_code;
+
+    if(class_code == req.body.class_code){
+        info = [];
+        info['instructor_username'] = req.user.username;
+        info['class_id'] = req.body.class_id;
+        info['class_title'] = req.body.class_title;
+    
+        Instructor.register(info, function(err, instructor)
+        {
+            if(err) throw err;
+            console.log(instructor);
+        });
+        req.flash('success_msg', 'You are now registered to teach this class');
+        res.redirect('/instructors/classes');
+    }
+    else{
+        req.flash('error_msg', 'You are not assigned instructor for this class');
+     res.redirect('/class');
+    }
+    
+    
+  });
+    
+   
+}
+
+);
 
 router.get('/classes/:id/lessons/new', function(req,res,next){
     res.render('instructors/newlesson', {class_id: req.params.id});
@@ -47,5 +67,16 @@ router.post('/classes/:id/lessons/new', function(req,res,next)
     req.flash('success_msg', 'Lesson Added');
     res.redirect('/instructors/classes');
 });
+
+router.get('/classes/:id/grades', function(req,res,next)
+{
+    Class.getclassById([req.params.id], function(err, classname)
+    {
+        if(err) throw err;
+        res.render('instructors/newgrade', {class: classname});
+    });    
+
+});
+
 
 module.exports = router;

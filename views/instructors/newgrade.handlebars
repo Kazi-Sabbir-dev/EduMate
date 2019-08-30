@@ -12,26 +12,21 @@
             
         </div>    
         {{/if}}
-<h2>{{instructor.first_name}}'s Classes</h2>
+<h2>{{class.title}}</h2>
 <table>
     <thead>
         <tr>
-            <th>Class ID</th>
-            <th>Class Name</th>
+            <th>Student_Username</th>
             <th></th>
-           <th></th>
-           <th></th>
+           
         </tr>
     </thead>
     <tbody>
-        {{#each instructor.classes}}
+        {{#each class.enrolled_students}}
         <tr>
-            <td>{{class_id}}</td>
-            <td>{{class_title}}</td>
-            <td><a href="/class/{{class_id}}/lessons">View Lessons</a></td>
-
-            <td><a href="/instructors/classes/{{class_id}}/lessons/new">Add Lesson</a></td>
-            <td><a href="/instructors/classes/{{class_id}}/grades">Add Grade</a></td>
+            <td>{{student_username}}</td>
+            
+            <td><a href="/instructors/classes/{{class_id}}/grades/new">Add Grade</a></td>
             
             
         </tr>

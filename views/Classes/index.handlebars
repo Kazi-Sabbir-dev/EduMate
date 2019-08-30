@@ -8,6 +8,17 @@
     
     <div class="neat-article-title">
      <section>
+       {{#if error_msg}}
+        <div class=" callout alert " data-closable="slide-out-right" >
+            
+           <p><i class="fi-alert"></i> {{error_msg}} 
+           </p> 
+           <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+               <span aria-hidden="true">&times;</span>
+            </button>
+            
+        </div>    
+        {{/if}}
      <h3 class="article-title">
        View your classes here.
       </h3>
