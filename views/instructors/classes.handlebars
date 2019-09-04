@@ -12,6 +12,17 @@
             
         </div>    
         {{/if}}
+         {{#if error_msg}}
+        <div class=" callout alert " data-closable="slide-out-right" >
+            
+           <p><i class="fi-alert"></i> {{error_msg}} 
+           </p> 
+           <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+               <span aria-hidden="true">&times;</span>
+            </button>
+            
+        </div>    
+        {{/if}}
 <h2>{{instructor.first_name}}'s Classes</h2>
 <table>
     <thead>
@@ -19,6 +30,7 @@
             <th>Class ID</th>
             <th>Class Name</th>
             <th></th>
+           <th></th>
            <th></th>
            <th></th>
         </tr>
@@ -29,6 +41,7 @@
             <td>{{class_id}}</td>
             <td>{{class_title}}</td>
             <td><a href="/class/{{class_id}}/lessons">View Lessons</a></td>
+            <td><a href="/class/{{class_id}}/grades">View Grades</a></td>
 
             <td><a href="/instructors/classes/{{class_id}}/lessons/new">Add Lesson</a></td>
             <td><a href="/instructors/classes/{{class_id}}/grades">Add Grade</a></td>

@@ -4,6 +4,7 @@ var router = express.Router();
 Class = require('../models/class');
 Instructor = require('../models/instructor');
 User = require('../models/user');
+Student = require('../models/student');
 
 router.get('/classes', function(req,res,next){
     Instructor.getInstructorByUsername(req.user.username, function(err, instructor){
@@ -60,6 +61,7 @@ router.post('/classes/:id/lessons/new', function(req,res,next)
     info ['lesson_number'] = req.body.lesson_number;
     info['lesson_title'] = req.body.lesson_title;
     info['lesson_body'] = req.body.lesson_body;
+    
 
     Class.addLesson(info, function(err, lesson){
             console.log('Lesson Added..');
@@ -77,6 +79,55 @@ router.get('/classes/:id/grades', function(req,res,next)
     });    
 
 });
+
+router.post('/classes/:id/grades', function(req,res,next)
+{
+    
+   
+    Class.getclassById([req.params.id], function(err, classname)
+  {
+    var info = [];
+    info['class_id'] = req.params.id;
+    info['student_username'] = req.body.student_username;
+    info['quiz'] = req.body.quiz;
+    info['mid'] = req.body.mid;
+    info['final'] = req.body.final;
+    info['assignment'] = req.body.assignment;
+    var same_user = false;
+
+      if(err) throw err;
+      for(i=0; i<classname.grades.length;i++)
+        {
+            if(classname.grades[i].student_username == req.body.student_username){
+                same_user = true;
+            }
+            
+        }
+        if(same_user){
+            req.flash('error_msg', 'You have already graded this student');
+        res.redirect('/instructors/classes');
+        }
+        else{
+            Class.addGrade(info, function(err, grade)
+            {
+                
+                console.log('Class Grade Added....');
+            });
+            Student.addGrade(info, function(err, grade)
+            {
+                console.log('Student Grade Added...');
+            });
+            req.flash('success_msg', 'Grade Added');
+            res.redirect('/instructors/classes');
+
+        }
+        
+  });
+  
+});
+
+
+// if grade already exsits
 
 
 module.exports = router;

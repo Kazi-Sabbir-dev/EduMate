@@ -30,6 +30,15 @@ const ClassSchema = mongoose.Schema({
         {
             student_username: {type: String}
         }
+    ],
+    grades:[
+        {
+            student_username: {type: String},
+            quiz: {type: Number},
+            mid: {type: Number},
+            final: {type: Number},
+            assignment: {type: Number}
+        }
     ]
    
 });
@@ -72,6 +81,7 @@ module.exports.register = function(info, callback){
     
 
     var query = {_id: class_id};
+    
     Class.findOneAndUpdate(
         query,
         {$push: {"enrolled_students": { student_username: student_username}}},
@@ -80,3 +90,25 @@ module.exports.register = function(info, callback){
     );
 }
 
+module.exports.addGrade = function(info, callback)
+{
+
+    class_id = info['class_id']; 
+   student_username = info['student_username']; 
+    quiz = info['quiz'] ;
+    mid = info['mid'] ;
+     final = info['final']; 
+    assignment = info['assignment'] ;
+    var query = {_id: class_id };
+   
+        Class.findOneAndUpdate(
+            query,
+            {$push: {"grades": {student_username: student_username, quiz: quiz, mid: mid, final: final, assignment: assignment}}},
+            {safe: true, upsert: true},
+            callback
+        );
+    
+   
+    
+
+}

@@ -1,0 +1,27 @@
+{{> navigation}}
+<section>
+<h2> {{class.title}}'s Classes</h2>
+<table >
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Quiz</th>
+            <th>Mid</th>
+            <th>Final</th>
+            <th>Assignment</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each class.grades}}
+            <tr>
+                <td>{{student_username}}</td>
+                <td>{{quiz}}</td>
+                <td>{{mid}}</td>
+                <td>{{final}}</td>
+                <td>{{assignment}}</td>
+            </tr>
+        {{/each}}
+
+    </tbody>
+</table>
+</section>

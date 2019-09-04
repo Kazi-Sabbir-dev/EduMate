@@ -47,6 +47,15 @@ router.get('/:id/lessons/:lesson_id', function(req,res,next)
     });
 });
 
+router.get('/:id/grades', function(req,res,next)
+{
+    Classes.getclassById([req.params.id],function(err, classname)
+    {
+        if(err) throw err;
+        res.render('Classes/grades', { class: classname });
+    });
+});
+
 
    
 

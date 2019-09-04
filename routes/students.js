@@ -13,6 +13,18 @@ router.get('/classes', function(req,res,next){
     });
 });
 
+router.get('/classes/grades', function(req,res,next)
+{
+  Student.getStudentByUsername(req.user.username, function(err, student){
+
+    if(err) throw err;
+    res.render('students/grades', {student: student});
+});
+
+}
+
+);
+
 
 router.post('/classes/:id/register',function(req,res)
 {   

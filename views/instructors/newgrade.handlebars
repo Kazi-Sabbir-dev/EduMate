@@ -13,10 +13,15 @@
         </div>    
         {{/if}}
 <h2>{{class.title}}</h2>
+
 <table>
     <thead>
         <tr>
             <th>Student_Username</th>
+            <th>Quiz</th>
+            <th>Mid</th>
+            <th>Final</th>
+            <th>Assignment</th>
             <th></th>
            
         </tr>
@@ -24,13 +29,23 @@
     <tbody>
         {{#each class.enrolled_students}}
         <tr>
-            <td>{{student_username}}</td>
             
-            <td><a href="/instructors/classes/{{class_id}}/grades/new">Add Grade</a></td>
+            <form method="post" action="/instructors/classes/{{../class._id}}/grades" id="myform" >
             
+            <td>{{student_username}}<input type="hidden" name="student_username" value="{{student_username}}"></td>
             
-        </tr>
+            <td><input type="number" name="quiz"></td>
+            <td><input type="number" name="mid"></td>
+            <td><input type="number" name="final"></td>
+            <td><input type="number" name="assignment"></td>
+            <td><input type="submit" class="button" value="Add Grade"></td>
+            
+            </form>
+            
+         
+         </tr>
         {{/each}}
     </tbody>
 </table>
+
 </section>
