@@ -31,15 +31,34 @@ const ClassSchema = mongoose.Schema({
             student_username: {type: String}
         }
     ],
-    grades:[
+    quiz:[
         {
             student_username: {type: String},
-            quiz: {type: Number},
-            mid: {type: Number},
-            final: {type: Number},
-            assignment: {type: Number}
+            total:{type: Number},
+            obtained_marks: {type: Number} 
+        }
+    ],
+    mid:[{
+        student_username: {type: String},
+        total:{type: Number},
+        obtained_marks: {type: Number} 
+    }
+    ],
+    final:[{
+        student_username: {type: String},
+        total:{type: Number},
+        obtained_marks: {type: Number} 
+    }
+    ],
+    assignment:[
+        {   
+            student_username: {type: String},
+             total:{type: Number},
+             obtained_marks: {type: Number}
+
         }
     ]
+    
    
 });
 
@@ -90,20 +109,19 @@ module.exports.register = function(info, callback){
     );
 }
 
-module.exports.addGrade = function(info, callback)
+module.exports.addQuiz = function(info, callback)
 {
 
     class_id = info['class_id']; 
    student_username = info['student_username']; 
-    quiz = info['quiz'] ;
-    mid = info['mid'] ;
-     final = info['final']; 
-    assignment = info['assignment'] ;
+    total = info['total'];
+    obtained_marks = info['obtained_marks'];
+    
     var query = {_id: class_id };
    
         Class.findOneAndUpdate(
             query,
-            {$push: {"grades": {student_username: student_username, quiz: quiz, mid: mid, final: final, assignment: assignment}}},
+            {$push: {"quiz": {student_username: student_username, total: total, obtained_marks: obtained_marks}}},
             {safe: true, upsert: true},
             callback
         );
@@ -112,3 +130,69 @@ module.exports.addGrade = function(info, callback)
     
 
 }
+
+module.exports.addMid = function(info, callback)
+{
+
+    class_id = info['class_id']; 
+   student_username = info['student_username']; 
+    total = info['total'];
+    obtained_marks = info['obtained_marks'];
+    
+    var query = {_id: class_id };
+   
+        Class.findOneAndUpdate(
+            query,
+            {$push: {"mid": {student_username: student_username, total: total, obtained_marks: obtained_marks}}},
+            {safe: true, upsert: true},
+            callback
+        );
+    
+   
+    
+
+}
+
+module.exports.addFinal = function(info, callback)
+{
+
+    class_id = info['class_id']; 
+   student_username = info['student_username']; 
+    total = info['total'];
+    obtained_marks = info['obtained_marks'];
+    
+    var query = {_id: class_id };
+   
+        Class.findOneAndUpdate(
+            query,
+            {$push: {"final": {student_username: student_username, total: total, obtained_marks: obtained_marks}}},
+            {safe: true, upsert: true},
+            callback
+        );
+    
+   
+    
+
+}
+module.exports.addAssignment = function(info, callback)
+{
+
+    class_id = info['class_id']; 
+   student_username = info['student_username']; 
+    total = info['total'];
+    obtained_marks = info['obtained_marks'];
+    
+    var query = {_id: class_id };
+   
+        Class.findOneAndUpdate(
+            query,
+            {$push: {"assignment": {student_username: student_username, total: total, obtained_marks: obtained_marks}}},
+            {safe: true, upsert: true},
+            callback
+        );
+    
+   
+    
+
+}
+

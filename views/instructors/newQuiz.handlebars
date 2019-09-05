@@ -1,0 +1,47 @@
+{{> navigation}}
+<section>
+    {{#if success_msg}}
+        <div class="callout success" data-closable="slide-out-right" >
+            
+           <p><i class="fi-alert"></i> {{success_msg}} </p>
+            
+            <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+               <span aria-hidden="true">&times;</span>
+            </button>
+
+            
+        </div>    
+        {{/if}}
+<h2>{{class.title}}'s Quiz</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Student_Username</th>
+            <th>Total Marks</th>
+            <th>Obtained Marks</th>
+            <th></th>
+            
+           
+        </tr>
+    </thead>
+    <tbody>
+        {{#each class.enrolled_students}}
+        <tr>
+            
+            <form method="post" action="/instructors/classes/{{../class._id}}/newQuiz" id="myform" >
+            
+            <td>{{student_username}}<input type="hidden" name="student_username" value="{{student_username}}"> <input type="hidden" name="class_title" value="{{../class.title}}"></td>
+            
+            <td><input type="number" name="total"></td>
+            <td><input type="number" name="obtained_marks"></td>
+            <td><input type="submit" class="button" value="Add Grade"></td>
+            </form>
+            
+         
+         </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+</section>

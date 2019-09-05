@@ -22,15 +22,39 @@ const StudentSchema = mongoose.Schema({
          class_title: {type: String}
          
      }],
-     grades:[
+     quiz:[
         {
             class_id: {type: [mongoose.Schema.Types.ObjectId]},
-            quiz: {type: Number},
-            mid: {type: Number},
-            final: {type: Number},
-            assignment: {type: Number}
+            class_title: {type: String} ,
+            total:{type: Number},
+            obtained_marks: {type: Number},
+            
+        }
+    ],
+    mid:[{
+        class_id: {type: [mongoose.Schema.Types.ObjectId]},
+        class_title: {type: String} ,
+        total:{type: Number},
+        obtained_marks: {type: Number} 
+    }
+    ],
+    final:[{
+        class_id: {type: [mongoose.Schema.Types.ObjectId]},
+        class_title: {type: String} ,
+        total:{type: Number},
+        obtained_marks: {type: Number} 
+    }
+    ],
+    assignment:[
+        {   
+            class_id: {type: [mongoose.Schema.Types.ObjectId]},
+            class_title: {type: String} ,
+             total:{type: Number},
+             obtained_marks: {type: Number}
+
         }
     ]
+    
     
 });
 
@@ -58,20 +82,84 @@ module.exports.register = function(info, callback){
 
 
 
-module.exports.addGrade = function(info,callback)
+module.exports.addQuiz = function(info_student,callback)
 {
-    class_id = info['class_id']; 
-    student_username = info['student_username']; 
-     quiz = info['quiz'] ;
-     mid = info['mid'] ;
-      final = info['final']; 
-     assignment = info['assignment'] ;
+    class_id = info_student['class_id']; 
+    student_username = info_student['student_username']; 
+     class_title = info_student['class_title'];
+     total = info_student['total'];
+     obtained_marks = info_student['obtained_marks']; 
      var query = {username: student_username };
      
      
         Student.findOneAndUpdate(
             query,
-            {$push: {"grades": {class_id: class_id, quiz: quiz, mid: mid, final: final, assignment: assignment}}},
+            {$push: {"quiz": {class_id: class_id, class_title: class_title, total: total, obtained_marks: obtained_marks}}},
+            {safe: true, upsert: true},
+            callback
+        );
+       
+     
+     
+
+}
+module.exports.addMid = function(info_student,callback)
+{
+    class_id = info_student['class_id']; 
+    student_username = info_student['student_username']; 
+     class_title = info_student['class_title']
+     total = info['total'];
+     obtained_marks = info['obtained_marks']; 
+     var query = {username: student_username };
+     
+     
+        Student.findOneAndUpdate(
+            query,
+            {$push: {"mid": {class_id: class_id, class_title: class_title, total: total, obtained_marks: obtained_marks}}},
+            {safe: true, upsert: true},
+            callback
+        );
+       
+     
+     
+
+}
+module.exports.addFinal = function(info_student,callback)
+{
+    class_id = info_student['class_id']; 
+    student_username = info_student['student_username']; 
+     class_title = info_student['class_title'];
+     total = info_student['total'];
+     obtained_marks = info_student['obtained_marks']; 
+     var query = {username: student_username };
+     
+     
+        Student.findOneAndUpdate(
+            query,
+            {$push: {"final": {class_id: class_id, class_title: class_title ,total: total, obtained_marks: obtained_marks}}},
+            {safe: true, upsert: true},
+            callback
+        );
+       
+     
+     
+
+}
+module.exports.addAssignment = function(info_student,callback)
+{
+    class_id = info_student['class_id']; 
+    class_title = info_student['class_title'];
+    student_username = info_student['student_username']; 
+     
+     total = info_student['total'];
+     obtained_marks = info_student['obtained_marks']; 
+
+     var query = {username: student_username };
+     
+     
+        Student.findOneAndUpdate(
+            query,
+            {$push: {"assignment": {class_id: class_id,class_title: class_title, total: total, obtained_marks: obtained_marks}}},
             {safe: true, upsert: true},
             callback
         );

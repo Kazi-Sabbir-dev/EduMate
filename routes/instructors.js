@@ -57,6 +57,7 @@ router.post('/classes/:id/lessons/new', function(req,res,next)
 {   
     // get values
     var info =[];
+    cls_id = req.params.id; 
     info['class_id']  = req.params.id;
     info ['lesson_number'] = req.body.lesson_number;
     info['lesson_title'] = req.body.lesson_title;
@@ -80,7 +81,45 @@ router.get('/classes/:id/grades', function(req,res,next)
 
 });
 
-router.post('/classes/:id/grades', function(req,res,next)
+router.get('/classes/:id/addQuiz', function(req,res,next)
+{
+    Class.getclassById([req.params.id], function(err, classname)
+    {
+        if(err) throw err;
+        res.render('instructors/newQuiz', {class: classname});
+    });    
+
+});
+router.get('/classes/:id/addMid', function(req,res,next)
+{
+    Class.getclassById([req.params.id], function(err, classname)
+    {
+        if(err) throw err;
+        res.render('instructors/newMid', {class: classname});
+    });    
+
+});
+router.get('/classes/:id/addFinal', function(req,res,next)
+{
+    Class.getclassById([req.params.id], function(err, classname)
+    {
+        if(err) throw err;
+        res.render('instructors/newFinal', {class: classname});
+    });    
+
+});
+router.get('/classes/:id/addAssignment', function(req,res,next)
+{
+    Class.getclassById([req.params.id], function(err, classname)
+    {
+        if(err) throw err;
+        res.render('instructors/newAssignment', {class: classname});
+    });    
+
+});
+
+
+router.post('/classes/:id/newQuiz', function(req,res,next)
 {
     
    
@@ -89,16 +128,21 @@ router.post('/classes/:id/grades', function(req,res,next)
     var info = [];
     info['class_id'] = req.params.id;
     info['student_username'] = req.body.student_username;
-    info['quiz'] = req.body.quiz;
-    info['mid'] = req.body.mid;
-    info['final'] = req.body.final;
-    info['assignment'] = req.body.assignment;
+    info['total'] = req.body.total;
+    info['obtained_marks'] = req.body.obtained_marks;
+    var info_student = [];
+    info_student['class_id'] = req.params.id;
+    info_student['class_title'] = req.body.class_title;
+    info_student['student_username'] = req.body.student_username;
+    info_student['total'] = req.body.total;
+    info_student['obtained_marks'] = req.body.obtained_marks;
     var same_user = false;
+    
 
       if(err) throw err;
-      for(i=0; i<classname.grades.length;i++)
+      for(i=0; i<classname.quiz.length;i++)
         {
-            if(classname.grades[i].student_username == req.body.student_username){
+            if(classname.quiz[i].student_username == req.body.student_username){
                 same_user = true;
             }
             
@@ -108,16 +152,16 @@ router.post('/classes/:id/grades', function(req,res,next)
         res.redirect('/instructors/classes');
         }
         else{
-            Class.addGrade(info, function(err, grade)
+            Class.addQuiz(info, function(err, grade)
             {
                 
                 console.log('Class Grade Added....');
             });
-            Student.addGrade(info, function(err, grade)
+            Student.addQuiz(info_student, function(err, grade)
             {
                 console.log('Student Grade Added...');
             });
-            req.flash('success_msg', 'Grade Added');
+            req.flash('success_msg', 'grade added');
             res.redirect('/instructors/classes');
 
         }
@@ -127,7 +171,163 @@ router.post('/classes/:id/grades', function(req,res,next)
 });
 
 
-// if grade already exsits
+router.post('/classes/:id/newMid', function(req,res,next)
+{
+    
+   
+    Class.getclassById([req.params.id], function(err, classname)
+  {
+    var info = [];
+    info['class_id'] = req.params.id;
+    info['student_username'] = req.body.student_username;
+    info['total'] = req.body.total;
+    info['obtained_marks'] = req.body.obtained_marks;
+    var info_student = [];
+    info_student['class_id'] = req.params.id;
+    info_student['class_title'] = req.body.class_title;
+    info_student['student_username'] = req.body.student_username;
+    info_student['total'] = req.body.total;
+    info_student['obtained_marks'] = req.body.obtained_marks;
+   
+    
+    var same_user = false;
+    
 
+      if(err) throw err;
+      for(i=0; i<classname.mid.length;i++)
+        {
+            if(classname.mid[i].student_username == req.body.student_username){
+                same_user = true;
+            }
+            
+        }
+        if(same_user){
+            req.flash('error_msg', 'You have already graded this student');
+        res.redirect('/instructors/classes');
+        }
+        else{
+            Class.addMid(info, function(err, grade)
+            {
+                
+                console.log('Class Grade Added....');
+            });
+            Student.addMid(info_student, function(err, grade)
+            {
+                console.log('Student Grade Added...');
+            });
+            req.flash('success_msg', 'grade added');
+            res.redirect('/instructors/classes');
+
+        }
+        
+  });
+  
+});
+
+router.post('/classes/:id/newFinal', function(req,res,next)
+{
+    
+   
+    Class.getclassById([req.params.id], function(err, classname)
+  {
+    var info = [];
+    info['class_id'] = req.params.id;
+    info['student_username'] = req.body.student_username;
+    info['total'] = req.body.total;
+    info['obtained_marks'] = req.body.obtained_marks;
+    
+    var info_student = [];
+    info_student['class_id'] = req.params.id;
+    info_student['class_title'] = req.body.class_title;
+    info_student['student_username'] = req.body.student_username;
+    info_student['total'] = req.body.total;
+    info_student['obtained_marks'] = req.body.obtained_marks;
+   
+    
+    var same_user = false;
+    
+
+      if(err) throw err;
+      for(i=0; i<classname.final.length;i++)
+        {
+            if(classname.final[i].student_username == req.body.student_username){
+                same_user = true;
+            }
+            
+        }
+        if(same_user){
+            req.flash('error_msg', 'You have already graded this student');
+        res.redirect('/instructors/classes');
+        }
+        else{
+            Class.addFinal(info, function(err, grade)
+            {
+                
+                console.log('Class Grade Added....');
+            });
+            Student.addFinal(info_student, function(err, grade)
+            {
+                console.log('Student Grade Added...');
+            });
+            req.flash('success_msg', 'grade added');
+            res.redirect('/instructors/classes');
+
+        }
+        
+  });
+  
+});
+
+router.post('/classes/:id/newAssignment', function(req,res,next)
+{
+    
+   
+    Class.getclassById([req.params.id], function(err, classname)
+  {
+    var info = [];
+    info['class_id'] = req.params.id;
+    info['student_username'] = req.body.student_username;
+    info['total'] = req.body.total;
+    info['obtained_marks'] = req.body.obtained_marks;
+    var info_student = [];
+    info_student['class_id'] = req.params.id;
+    info_student['class_title'] = req.body.class_title;
+    info_student['student_username'] = req.body.student_username;
+    info_student['total'] = req.body.total;
+    info_student['obtained_marks'] = req.body.obtained_marks;
+   
+    var same_user = false;
+    
+
+      if(err) throw err;
+      for(i=0; i<classname.assignment.length;i++)
+        {
+            if(classname.assignment[i].student_username == req.body.student_username){
+                same_user = true;
+            }
+            
+        }
+        if(same_user){
+            req.flash('error_msg', 'You have already graded this student');
+        res.redirect('/instructors/classes');
+        }
+        else{
+            Class.addAssignment(info, function(err, grade)
+            {
+                
+                console.log('Class Grade Added....');
+            });
+            Student.addAssignment(info_student, function(err, grade)
+            {
+                console.log('Student Grade Added...');
+            });
+            req.flash('success_msg', 'grade added');
+            res.redirect('/instructors/classes');
+
+        }
+        
+  });
+  
+});
 
 module.exports = router;
