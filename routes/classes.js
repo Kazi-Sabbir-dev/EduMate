@@ -56,6 +56,39 @@ router.get('/:id/grades', function(req,res,next)
     });
 });
 
+router.get('/:id/quizGrade', function(req,res,next)
+{
+    Classes.getclassById([req.params.id],function(err, classname)
+    {
+        if(err) throw err;
+        res.render('Classes/quiz', { class: classname });
+    });
+});
+router.get('/:id/midGrade', function(req,res,next)
+{
+    Classes.getclassById([req.params.id],function(err, classname)
+    {
+        if(err) throw err;
+        res.render('Classes/mid', { class: classname });
+    });
+});
+router.get('/:id/finalGrade', function(req,res,next)
+{
+    Classes.getclassById([req.params.id],function(err, classname)
+    {
+        if(err) throw err;
+        res.render('Classes/final', { class: classname });
+    });
+});
+router.get('/:id/assignmentGrade', function(req,res,next)
+{
+    Classes.getclassById([req.params.id],function(err, classname)
+    {
+        if(err) throw err;
+        res.render('Classes/assignment', { class: classname });
+    });
+});
+
 
    
 

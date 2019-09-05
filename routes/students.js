@@ -21,10 +21,45 @@ router.get('/classes/grades', function(req,res,next)
     res.render('students/grades', {student: student});
 });
 
-}
+});
 
-);
+router.get('/classes/quiz', function(req,res,next)
+{
+  Student.getStudentByUsername(req.user.username, function(err, student){
 
+    if(err) throw err;
+    res.render('students/quiz', {student: student});
+});
+
+});
+
+router.get('/classes/mid', function(req,res,next)
+{
+  Student.getStudentByUsername(req.user.username, function(err, student){
+
+    if(err) throw err;
+    res.render('students/mid', {student: student});
+});
+
+});
+router.get('/classes/final', function(req,res,next)
+{
+  Student.getStudentByUsername(req.user.username, function(err, student){
+
+    if(err) throw err;
+    res.render('students/final', {student: student});
+});
+
+});
+router.get('/classes/assignment', function(req,res,next)
+{
+  Student.getStudentByUsername(req.user.username, function(err, student){
+
+    if(err) throw err;
+    res.render('students/assignment', {student: student});
+});
+
+});
 
 router.post('/classes/:id/register',function(req,res)
 {   

@@ -159,7 +159,7 @@ module.exports.addAssignment = function(info_student,callback)
      
         Student.findOneAndUpdate(
             query,
-            {$push: {"assignment": {class_id: class_id,class_title: class_title, total: total, obtained_marks: obtained_marks}}},
+            {$push: {"assignment": {class_id: class_id, class_title: class_title, total: total, obtained_marks: obtained_marks}}},
             {safe: true, upsert: true},
             callback
         );

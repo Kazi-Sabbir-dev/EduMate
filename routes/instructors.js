@@ -162,7 +162,7 @@ router.post('/classes/:id/newQuiz', function(req,res,next)
                 console.log('Student Grade Added...');
             });
             req.flash('success_msg', 'grade added');
-            res.redirect('/instructors/classes');
+            res.send('grade added');
 
         }
         
@@ -216,7 +216,7 @@ router.post('/classes/:id/newMid', function(req,res,next)
                 console.log('Student Grade Added...');
             });
             req.flash('success_msg', 'grade added');
-            res.redirect('/instructors/classes');
+            res.send('grade added');
 
         }
         
@@ -270,7 +270,7 @@ router.post('/classes/:id/newFinal', function(req,res,next)
                 console.log('Student Grade Added...');
             });
             req.flash('success_msg', 'grade added');
-            res.redirect('/instructors/classes');
+            res.send('grade added');
 
         }
         
@@ -322,7 +322,7 @@ router.post('/classes/:id/newAssignment', function(req,res,next)
                 console.log('Student Grade Added...');
             });
             req.flash('success_msg', 'grade added');
-            res.redirect('/instructors/classes');
+            res.send('grade added');
 
         }
         

@@ -5,26 +5,21 @@
 <table>
     <thead>
         <tr>
-            <th>Class ID</th>
             <th>Quiz</th>
             <th>Mid</th>
-            <th>Final</th>
             <th>Assignment</th>
+            <th>Final</th>
+            
             
         </tr>
     </thead>
     <tbody>
-        {{#each student.grades}}
         <tr>
-            <td>{{class_id}}</td>
-            <td>{{quiz}}</td>
-            <td>{{mid}}</td>
-            <td>{{final}}</td>
-            <td>{{assignment}}</td>
-            
-            
+            <td><a class="button" href="/students/classes/quiz">View Quiz Grades </a></td>
+            <td><a class="button" href="/students/classes/mid">View Mid Grades </a></td>
+            <td><a class="button" href="/students/classes/assignment">View Assignment Grades </a></td>
+            <td><a class="button" href="/students/classes/final">View Final Grades </a></td>
         </tr>
-        {{/each}}
     </tbody>
 </table>
 </section>

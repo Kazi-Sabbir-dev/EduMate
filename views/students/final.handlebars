@@ -1,0 +1,30 @@
+{{> navigation}}
+<section>
+
+<h2>{{student.first_name}}'s Final Grades</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Class ID</th>
+            <th>Class Title</th>
+            <th>Total Marks</th>
+            <th>Obtained Marks</th>
+            
+            
+        </tr>
+    </thead>
+    <tbody>
+        {{#each student.final}}
+        <tr>
+            <td>{{class_id}}</td>
+            <td>{{class_title}}</td>
+            <td>{{total}}</td>
+            <td>{{obtained_marks}}</td>
+            
+            
+            
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+</section>

@@ -1,10 +1,10 @@
 {{> navigation}}
 <section>
-<h2> {{class.title}}'s Classes</h2>
+<h2> {{class.title}}'s grades</h2>
 <table >
     <thead>
         <tr>
-            <th>Student</th>
+            
             <th>Quiz</th>
             <th>Mid</th>
             <th>Final</th>
@@ -12,15 +12,16 @@
         </tr>
     </thead>
     <tbody>
-        {{#each class.grades}}
+       
             <tr>
-                <td>{{student_username}}</td>
-                <td>{{quiz}}</td>
-                <td>{{mid}}</td>
-                <td>{{final}}</td>
-                <td>{{assignment}}</td>
+                <td><a class="button" href="/class/{{class._id}}/quizGrade">View Quiz Grade</a></td>
+                <td><a class="button" href="/class/{{class._id}}/midGrade">View Mid Grade</a></td>
+                <td><a class="button" href="/class/{{class._id}}/assignmentGrade">View Assignment Grade</a></td>
+                <td><a class="button" href="/class/{{class._id}}/finalGrade">View Final Grade</a></td>
+                
+                
             </tr>
-        {{/each}}
+        
 
     </tbody>
 </table>
