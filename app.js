@@ -25,7 +25,7 @@ const classRouter = require('./routes/classes');
 const aboutRouter = require('./routes/about');
 const contactRouter = require('./routes/contact');
 const loginRouter = require('./routes/login');
-const gradesRouter = require('./routes/grades');
+
 const students = require('./routes/students');
 const instructors = require('./routes/instructors');
 const app = express();
@@ -88,7 +88,7 @@ app.use('/class', classRouter);
 app.use('/about', aboutRouter);
 app.use('/contact', contactRouter);
 app.use('/login', loginRouter);
-app.use('/grades', gradesRouter);
+
 
 app.use('/students', students);
 app.use('/instructors', instructors);

@@ -47,8 +47,8 @@ const StudentSchema = mongoose.Schema({
     ],
     assignment:[
         {   
-            class_id: {type: [mongoose.Schema.Types.ObjectId]},
-            class_title: {type: String} ,
+             class_id: {type: [mongoose.Schema.Types.ObjectId]},
+             class_title: {type: String} ,
              total:{type: Number},
              obtained_marks: {type: Number}
 
@@ -108,8 +108,8 @@ module.exports.addMid = function(info_student,callback)
     class_id = info_student['class_id']; 
     student_username = info_student['student_username']; 
      class_title = info_student['class_title']
-     total = info['total'];
-     obtained_marks = info['obtained_marks']; 
+     total = info_student['total'];
+     obtained_marks = info_student['obtained_marks']; 
      var query = {username: student_username };
      
      

@@ -9,6 +9,7 @@
             <th>Class Title</th>
             <th>Total Marks</th>
             <th>Obtained Marks</th>
+            <th>View Your Progress</th>
             
             
         </tr>
@@ -20,6 +21,14 @@
             <td>{{class_title}}</td>
             <td>{{total}}</td>
             <td>{{obtained_marks}}</td>
+            <td>
+                <form method="post" action="/students/classes/quiz" >
+                <input type="hidden" name="class_id" value="{{class_id}}">
+                <input type="hidden" name="obtained_marks" value="{{obtained_marks}}">
+                <input type="submit" value="View Your Progress">
+                 </form>
+            </td>
+           
             
             
             

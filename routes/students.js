@@ -61,6 +61,77 @@ router.get('/classes/assignment', function(req,res,next)
 
 });
 
+router.post('/classes/quiz', function(req,res,next)
+{
+  class_id = req.body.class_id;
+  
+  Class.getclassById(class_id, function(err, classname)
+    {
+        var Highestmarks = 0 ;
+        if(err) throw err;
+        for(i=0; i<classname.quiz.length;i++)
+        {
+            if(Highestmarks < classname.quiz[i].obtained_marks ){
+                Highestmarks = classname.quiz[i].obtained_marks;
+            }
+        }
+        res.render('students/quizProg', { Highestmarks: Highestmarks});
+    });
+});
+
+router.post('/classes/mid', function(req,res,next)
+{
+  class_id = req.body.class_id;
+  
+  Class.getclassById(class_id, function(err, classname)
+    {
+        var Highestmarks = 0 ;
+        if(err) throw err;
+        for(i=0; i<classname.mid.length;i++)
+        {
+            if(Highestmarks < classname.mid[i].obtained_marks ){
+                Highestmarks = classname.mid[i].obtained_marks;
+            }
+        }
+        res.render('students/midProg', { Highestmarks: Highestmarks});
+    });
+});
+
+router.post('/classes/final', function(req,res,next)
+{
+  class_id = req.body.class_id;
+  
+  Class.getclassById(class_id, function(err, classname)
+    {
+        var Highestmarks = 0 ;
+        if(err) throw err;
+        for(i=0; i<classname.final.length;i++)
+        {
+            if(Highestmarks < classname.final[i].obtained_marks ){
+                Highestmarks = classname.final[i].obtained_marks;
+            }
+        }
+        res.render('students/finalProg', { Highestmarks: Highestmarks});
+    });
+});
+
+router.post('/classes/assignment', function(req,res,next)
+{
+  class_id = req.body.class_id;
+  
+  Class.getclassById(class_id, function(err, classname)
+    {
+        var Highestmarks = 0 ;
+        if(err) throw err;
+        for(i=0; i<classname.assignment.length;i++)
+        {
+            if(Highestmarks < classname.assignment[i].obtained_marks ){
+                Highestmarks = classname.assignment[i].obtained_marks;
+            }
+        }
+        res.render('students/midProg', { Highestmarks: Highestmarks});
+    });
+});
 router.post('/classes/:id/register',function(req,res)
 {   
 
@@ -94,5 +165,6 @@ router.post('/classes/:id/register',function(req,res)
     
 
 });
+
 
 module.exports = router;
